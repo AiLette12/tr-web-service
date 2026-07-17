@@ -38,7 +38,7 @@ public class MockController {
         );
         return ResponseEntity.ok(response);
     }
-
+// Code yang bener
     @GetMapping("/mock3")
     public ResponseEntity<MockThreeResponse> getMock3() {
         MockThreeResponse response = new MockThreeResponse(
@@ -51,9 +51,12 @@ public class MockController {
         return ResponseEntity.ok(response);
     }
 
-    // =====================================================
-    // ENDPOINT ROLLBACK / KOMPENSASI (Tugas Andang - Saga)
-    // =====================================================
+// Uji coba dibuat rusak
+    // @GetMapping("/mock3")
+    // public ResponseEntity<MockThreeResponse> getMock3() {
+    //     // Sengaja dibuat error 500 untuk memicu Saga Rollback
+    //     return ResponseEntity.status(org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR).build();
+    // }
 
     /**
      * Rollback Mock 1: Membatalkan pesanan dan mengembalikan stok warung.

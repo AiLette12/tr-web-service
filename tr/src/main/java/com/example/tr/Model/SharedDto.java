@@ -7,9 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Menyimpan data yang diteruskan antar langkah orchestration.
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
