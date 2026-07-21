@@ -54,13 +54,10 @@ public class MockController {
 // Uji coba dibuat rusak
     // @GetMapping("/mock3")
     // public ResponseEntity<MockThreeResponse> getMock3() {
-    //     // Sengaja dibuat error 500 untuk memicu Saga Rollback
     //     return ResponseEntity.status(org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR).build();
     // }
 
-    /**
-     * Rollback Mock 1: Membatalkan pesanan dan mengembalikan stok warung.
-     */
+// buat mock 1
     @PostMapping("/mock1/rollback")
     public ResponseEntity<Map<String, String>> rollbackMock1() {
         return ResponseEntity.ok(Map.of(
@@ -70,9 +67,7 @@ public class MockController {
         ));
     }
 
-    /**
-     * Rollback Mock 2: Membatalkan pembayaran dan mengembalikan saldo.
-     */
+// buat mock 2
     @PostMapping("/mock2/rollback")
     public ResponseEntity<Map<String, String>> rollbackMock2() {
         return ResponseEntity.ok(Map.of(

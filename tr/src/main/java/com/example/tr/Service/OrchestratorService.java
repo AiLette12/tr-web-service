@@ -23,18 +23,12 @@ public class OrchestratorService {
         this.webClient = webClientBuilder.baseUrl(mockBaseUrl).build();
     }
 
-    /**
-     * Menjalankan seluruh langkah orchestration dengan pola Saga.
-     * Jika salah satu langkah gagal, langkah-langkah sebelumnya yang sudah
-     * berhasil akan di-rollback (compensating transaction) secara terbalik
-     * untuk menjaga konsistensi data.
-     */
     public SharedDto executeStep1And2() {
         MockOneResponse mock1Response = null;
         MockTwoResponse mock2Response = null;
         MockThreeResponse mock3Response = null;
 
-        // ==================== STEP 1: Pemesanan ====================
+        //Pemesanan
         try {
             mock1Response = Objects.requireNonNull(
                     webClient.get()
@@ -50,7 +44,7 @@ public class OrchestratorService {
             throw new RuntimeException("Orchestration gagal di Step 1: " + e.getMessage(), e);
         }
 
-        // ==================== STEP 2: Pembayaran ====================
+        // Pembayaran
         try {
             mock2Response = Objects.requireNonNull(
                     webClient.get()
@@ -68,7 +62,7 @@ public class OrchestratorService {
             throw new RuntimeException("Orchestration gagal di Step 2. Rollback Step 1 selesai.", e);
         }
 
-        // ==================== STEP 3: Pengiriman ====================
+        // Pengiriman
         try {
             mock3Response = Objects.requireNonNull(
                     webClient.get()
@@ -91,13 +85,7 @@ public class OrchestratorService {
         return new SharedDto(mock1Response, mock2Response, mock3Response);
     }
 
-    // =====================================================
-    // COMPENSATING TRANSACTIONS (Saga Rollback)
-    // =====================================================
-
-    /**
-     * Kompensasi Mock 1: Membatalkan pesanan dan mengembalikan stok warung.
-     */
+    //Tambahan kalau endpoint bermasalah
     private void compensateMock1(MockOneResponse originalResponse) {
         try {
             webClient.post()
@@ -113,9 +101,6 @@ public class OrchestratorService {
         }
     }
 
-    /**
-     * Kompensasi Mock 2: Membatalkan pembayaran dan mengembalikan saldo.
-     */
     private void compensateMock2(MockTwoResponse originalResponse) {
         try {
             webClient.post()

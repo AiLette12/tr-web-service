@@ -9,14 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Endpoint utama yang dipanggil client untuk menjalankan seluruh
- * proses orchestration (Step 1: Pemesanan -> Step 2: Pembayaran ->
- * Step 3: Pengiriman) dan mengembalikan hasil gabungannya dalam
- * satu response JSON.
- *
- * Tugas Anggota 5 - Agregasi & Dokumen.
- */
+
 @RestController
 @RequestMapping("/orchestrator")
 public class OrchestratorController {
